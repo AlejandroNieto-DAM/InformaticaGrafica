@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "cmath": "c",
+        "file_ply_stl.h": "c",
+        "glut.h": "c"
+    }
+}
