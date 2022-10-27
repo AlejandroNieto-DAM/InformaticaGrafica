@@ -50,7 +50,8 @@ modulo modelo.c
 int modo = GL_FILL;
 int iluminacion = 1;
 int modoVisualizacion = GL_FLAT;
-float alturaGancho = -7;
+float alturaGancho = -7, alturaG = -7;
+float despBrazo = 0;
 float angleG = 0;
 float anguloGrua = 0;
 float angleB = 0;
@@ -70,13 +71,13 @@ void lessDespGancho(){
 }
 
 void addAlturaGancho(){
-  alturaGancho -= 0.5;
+  alturaGancho -= 0.10;
   if(alturaGancho < -9)
     alturaGancho = -9;
 }
 
 void lessAlturaGancho(){
-  alturaGancho += 0.5;
+  alturaGancho += 0.10;
   if(alturaGancho > 0)
     alturaGancho = 0;
 }
@@ -282,18 +283,55 @@ void Dibuja (void)
 Procedimiento de fondo. Es llamado por glut cuando no hay eventos pendientes.
 
 **/
+bool rollingDesp = false;
+bool rollingAltura = false;
+bool rollingBrazo = false;
 void idle (int v)
 {
 
   glutPostRedisplay ();		// Redibuja
   glutTimerFunc (30, idle, 0);	// Vuelve a activarse dentro de 30 ms
 
- /* if(despG < 48){
+ if(despG < 18 and !rollingDesp){
     addDespGancho();
-    despG += 1;
+    despG += 0.15;
   } else {
-    despGancho = 0;
-    despG = 0;
-  }*/
+    rollingDesp = true;
+  } 
+
+  if(despG > 0 and rollingDesp){
+    lessDespGancho();
+    despG -= 0.15;
+  } else {
+    rollingDesp = false;
+  } 
+
+  if(alturaG < 21 and !rollingAltura){
+    addAlturaGancho();
+    alturaG += 0.25;
+  } else {
+    rollingAltura = true;
+  }
+
+  if(alturaG > 0 and rollingAltura){
+    lessAlturaGancho();
+    alturaG -= 0.25;
+  } else {
+    rollingAltura = false;
+  }
+
+  if(despBrazo < 270 and !rollingBrazo){
+    addAnguloBrazo();
+    despBrazo += 1;
+  } else {
+    rollingBrazo = true;
+  }
+
+  if(despBrazo > 0 and rollingBrazo){
+    lessAnguloBrazo();
+    despBrazo -= 1;
+  } else {
+    rollingBrazo = false;
+  }
     
 }
