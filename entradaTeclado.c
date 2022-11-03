@@ -139,6 +139,9 @@ void letra (unsigned char k, int x, int y)
     case 'd':
       lessDespGancho();
       break;
+    case 'A':
+      changeAnimacion();
+      break;
 
     default:
       return;

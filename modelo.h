@@ -58,6 +58,8 @@ void lessAlturaGancho();
 void addDespGancho();
 void lessDespGancho();
 
+void changeAnimacion();
+
 class Objeto3D 
 { 
 public: 
