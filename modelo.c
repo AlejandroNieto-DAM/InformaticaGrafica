@@ -230,55 +230,47 @@ void Dibuja(void)
 
   // COMIENZA EL CODIGO DE LA GRUA
 
+  //TORRE PRINCIPAL 
+
   // ROTACION GRUA
-  glRotatef(anguloGrua, 0, 1, 0);
-
-  glPushMatrix();
-
   creaEstructura(0, 0, 0, 0, 10, 0, 2, 2, 5);
+  glRotatef(anguloGrua, 0, 1, 0);
   glTranslatef(0, 10, 0);
   caja(1.6, 1, 1.6);
   glTranslatef(0, 1, 0);
-  // ROTACION BRAZO
-  glRotatef(anguloBrazo, 0, 1, 0);
-
+  
+  //BRAZOS DE LA GRUA
   glPushMatrix();
+
+  //ROTACION BRAZO
+  glRotatef(anguloBrazo, 0, 1, 0);
   creaTorre(0, 0, 0, 0, 5, 0, 2, 2, 3);
   creaBrazo(-15, 0, 0, -1, 0, 0, 2, 9);
   creaEstructura(10, 0.5, 0, 1, 0.5, 0, 1, 2, 5);
   glTranslatef(9, -2, 0);
   caja(2, 2, 2);
-  glTranslatef(-23, +2, 0);
 
+  glTranslatef(-23, +2, 0);
+  cilindro(2.1, 1.7, 0, 14, 5, 0, 0.1);
+  glTranslatef(14, 5, 0);
+  cilindro(0, 0, 0, 9, -5, 0, 0.1);
+
+  //CAJA y GANCHO
   glPushMatrix();
-  glTranslatef(despGancho, -0.25, 0);
+
+  glTranslatef(-14 + despGancho, -5.25, 0);
   caja(2, 0.25, 2);
 
+  //GANCHO
   glPushMatrix();
   cilindro(0, 0, 0, 0, alturaGancho, 0, 0.1);
   creaGancho(0, alturaGancho, 0, 1);
   glTranslatef(0, 0.25, 0);
-  cilindro(0, 0, 0, 14 - despGancho, 5, 0, 0.1);
-  glTranslatef(14 - despGancho, 5, 0);
-  cilindro(0, 0, 0, 9, -5, 0, 0.1);
+
 
   glPopMatrix();
   glPopMatrix();
   glPopMatrix();
-  glPopMatrix();
-
-  /*glShadeModel(GL_SMOOTH);
-  glTranslatef(0, 0, 0);
-  peon.draw();
-
-  glShadeModel(GL_FLAT);
-  glTranslatef(8, 0, 0);
-  beethovenFlat.draw();
-
-
-  glShadeModel(GL_SMOOTH);
-  glTranslatef(13, 0, 0);
-  bigDodge.draw();*/
 
   glPopMatrix(); // Desapila la transformacion geometrica
 
