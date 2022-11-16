@@ -58,6 +58,36 @@ float anguloBrazo = 0;
 float despGancho = 3, despG = 3;
 bool animacion = 0;
 
+float vDespBrazo = 1;
+float vDespG = 0.15;
+float vAlturaG = 0.25;
+
+
+void aumentarVelocidad(int p){
+  switch(p){
+    case 0:
+      vDespBrazo += 1;
+      break;
+    case 1:
+      vDespBrazo -= 1;
+      break;
+    case 2:
+      vDespG += 0.15;
+      break;
+    case 3:
+      vDespG -= 0.15;
+      break;
+    case 4:
+      vAlturaG += 0.25;
+      break;
+    case 5:
+      vAlturaG -= 0.25;
+      break;
+
+  }
+
+}
+
 void changeAnimacion()
 {
   animacion = !animacion;
@@ -65,56 +95,56 @@ void changeAnimacion()
 
 void addDespGancho()
 {
-  despGancho += 0.25;
+  despGancho += vDespBrazo;
   if (despGancho > 12)
     despGancho = 12;
 }
 
 void lessDespGancho()
 {
-  despGancho -= 0.25;
+  despGancho -= vDespBrazo;
   if (despGancho < 0)
     despGancho = 0;
 }
 
 void addAlturaGancho()
 {
-  alturaGancho -= 0.10;
+  alturaGancho -= vAlturaG;
   if (alturaGancho < -9)
     alturaGancho = -9;
 }
 
 void lessAlturaGancho()
 {
-  alturaGancho += 0.10;
+  alturaGancho += vAlturaG;
   if (alturaGancho > 0)
     alturaGancho = 0;
 }
 
 void addAnguloTorre()
 {
-  anguloGrua += 1;
+  anguloGrua += vDespG;
   if (anguloGrua > 360)
     anguloGrua = 0;
 }
 
 void lessAnguloTorre()
 {
-  anguloGrua -= 1;
+  anguloGrua -= vDespG;
   if (anguloGrua < 0)
     anguloGrua = 360;
 }
 
 void addAnguloBrazo()
 {
-  anguloBrazo += 1;
+  anguloBrazo += vDespBrazo;
   if (anguloBrazo > 360)
     anguloBrazo = 0;
 }
 
 void lessAnguloBrazo()
 {
-  anguloBrazo -= 1;
+  anguloBrazo -= vDespBrazo;
   if (anguloBrazo < 0)
     anguloBrazo = 360;
 }
@@ -233,8 +263,8 @@ void Dibuja(void)
   //TORRE PRINCIPAL 
 
   // ROTACION GRUA
-  creaEstructura(0, 0, 0, 0, 10, 0, 2, 2, 5);
   glRotatef(anguloGrua, 0, 1, 0);
+  creaEstructura(0, 0, 0, 0, 10, 0, 2, 2, 5);
   glTranslatef(0, 10, 0);
   caja(1.6, 1, 1.6);
   glTranslatef(0, 1, 0);
@@ -314,6 +344,8 @@ void idle(int v)
       rollingDesp = false;
     }
 
+    
+
     if (alturaG < 21 and !rollingAltura)
     {
       addAlturaGancho();
@@ -337,7 +369,7 @@ void idle(int v)
     if (despBrazo < 270 and !rollingBrazo)
     {
       addAnguloBrazo();
-      despBrazo += 1;
+      despBrazo += vDespBrazo;
     }
     else
     {
@@ -347,7 +379,7 @@ void idle(int v)
     if (despBrazo > 0 and rollingBrazo)
     {
       lessAnguloBrazo();
-      despBrazo -= 1;
+      despBrazo -= vDespBrazo;
     }
     else
     {

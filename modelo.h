@@ -60,6 +60,8 @@ void lessDespGancho();
 
 void changeAnimacion();
 
+void aumentarVelocidad(int p);
+
 class Objeto3D 
 { 
 public: 

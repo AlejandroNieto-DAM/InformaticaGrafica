@@ -80,7 +80,7 @@ y:
 **/
 
 float rotxCamara = 30, rotyCamara = 45;
-float dCamara = 10;
+float dCamara = 35;
 
 
 void letra (unsigned char k, int x, int y)
@@ -141,6 +141,24 @@ void letra (unsigned char k, int x, int y)
       break;
     case 'A':
       changeAnimacion();
+      break;
+    case 'Q':
+      aumentarVelocidad(0);
+      break;
+    case 'q':
+      aumentarVelocidad(1);
+      break;
+    case 'E':
+      aumentarVelocidad(2);
+      break;
+    case 'e':
+      aumentarVelocidad(3);
+      break;
+    case 'W':
+      aumentarVelocidad(4);
+      break;
+    case 'w':
+      aumentarVelocidad(5);
       break;
 
     default:
